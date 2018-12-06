@@ -22,7 +22,7 @@ export class RecipeEditComponent implements OnInit {
         this.id = +params['id'];
         this.editMode = params['id'] != null;
         this.initForm();
-      })
+      });
   }
 
   onAddIngredient() {
@@ -32,7 +32,7 @@ export class RecipeEditComponent implements OnInit {
         Validators.required,
         Validators.pattern(/^[1-9]+[0-9]*$/)
       ])
-    }))
+    }));
   }
 
   onSubmit() {
@@ -43,9 +43,9 @@ export class RecipeEditComponent implements OnInit {
     //   this.recipeForm.value['ingredients'])
 
     if (this.editMode) {
-      this.recipeService.updateRecipe(this.id, this.recipeForm.value)
+      this.recipeService.updateRecipe(this.id, this.recipeForm.value);
     } else {
-      this.recipeService.addRecipe(this.recipeForm.value)
+      this.recipeService.addRecipe(this.recipeForm.value);
     }
     this.router.navigate(['../'], { relativeTo: this.activatedRout });
   }
@@ -54,7 +54,7 @@ export class RecipeEditComponent implements OnInit {
     this.router.navigate(['../'], { relativeTo: this.activatedRout });
   }
 
-  onDeleteIngredient(index: number){
+  onDeleteIngredient(index: number) {
     (<FormArray>this.recipeForm.get('ingredients')).removeAt(index);
   }
 
@@ -62,7 +62,7 @@ export class RecipeEditComponent implements OnInit {
     let recipeName = '';
     let recipeImagePath = '';
     let recipeDescription = '';
-    let recipeIngredients = new FormArray([]);
+    const recipeIngredients = new FormArray([]);
 
     if (this.editMode) {
       const recipe = this.recipeService.getRecipe(this.id);
@@ -70,7 +70,7 @@ export class RecipeEditComponent implements OnInit {
       recipeImagePath = recipe.imagePath;
       recipeDescription = recipe.description;
       if (recipe['ingredients']) {
-        for (let ingredient of recipe.ingredients) {
+        for (const ingredient of recipe.ingredients) {
           recipeIngredients.push(
             new FormGroup({
               'name': new FormControl(ingredient.name, Validators.required),
@@ -79,7 +79,7 @@ export class RecipeEditComponent implements OnInit {
                 Validators.pattern(/^[1-9]+[0-9]*$/)
               ])
             })
-          )
+          );
         }
       }
     }
@@ -88,7 +88,7 @@ export class RecipeEditComponent implements OnInit {
       'imagePath': new FormControl(recipeImagePath, Validators.required),
       'description': new FormControl(recipeDescription, Validators.required),
       'ingredients': recipeIngredients
-    })
+    });
   }
 
 }

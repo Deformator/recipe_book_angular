@@ -34,8 +34,8 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
         this.shoppingListForm.setValue({
           'name': this.editedItem.name,
           'amount': this.editedItem.amount
-        })
-      })
+        });
+      });
   }
 
   onSubmit(form: NgForm) {
