@@ -9,23 +9,15 @@ import { AuthService } from '../auth.service';
 })
 export class SignupComponent implements OnInit {
 
-  authError = '';
-
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
   }
 
   onSignup(form: NgForm) {
-    this.authError = '';
     const email = form.value.email;
     const password = form.value.password;
-    this.authService.signupUser(email, password)
-      .catch(
-        error => {
-          this.authError = error.message;
-        }
-      )
+    this.authService.signupUser(email, password);
   }
 
 }
