@@ -6,8 +6,6 @@ import { AppRoutingModule } from "../app-routing.module";
 import { CommonModule } from "@angular/common";
 import { RecipeService } from "../recipes/recipe.service";
 import { DataStorageService } from "../shared/data-storage.service";
-import { AuthService } from "../auth/auth.service";
-import { AuthGuard } from "../auth/auth-guard.service";
 
 @NgModule({
     declarations: [
@@ -23,7 +21,7 @@ import { AuthGuard } from "../auth/auth-guard.service";
         AppRoutingModule,
         HeaderComponent
     ],
-    providers: [ RecipeService, DataStorageService, AuthService]
+    providers: [ RecipeService, DataStorageService]
 })
 export class CoreModule {
 
